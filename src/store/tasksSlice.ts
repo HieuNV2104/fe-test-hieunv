@@ -1,11 +1,6 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
-import type {
-  PaginationState,
-  Task,
-  TaskFilters,
-  TaskStatus,
-} from '@/types/task';
-import { TASKS_MOCK } from './tasksMock';
+import type { PaginationState, Task, TaskFilters, TaskStatus } from '@/types/task';
+import { TASKS_MOCK } from '@/constant/tasksMock';
 
 interface TasksState {
   items: Task[];
@@ -17,7 +12,7 @@ const initialFilters: TaskFilters = {
   searchText: '',
   status: [],
   priority: null,
-  dateRange: null,
+  dateRange: null
 };
 
 const initialState: TasksState = {
@@ -25,8 +20,8 @@ const initialState: TasksState = {
   filters: initialFilters,
   pagination: {
     currentPage: 1,
-    pageSize: 10,
-  },
+    pageSize: 10
+  }
 };
 
 const tasksSlice = createSlice({
@@ -47,10 +42,7 @@ const tasksSlice = createSlice({
       const ids = new Set(action.payload);
       state.items = state.items.filter((t) => !ids.has(t.id));
     },
-    updateTaskStatus(
-      state,
-      action: PayloadAction<{ id: string; status: TaskStatus }>,
-    ) {
+    updateTaskStatus(state, action: PayloadAction<{ id: string; status: TaskStatus }>) {
       const task = state.items.find((t) => t.id === action.payload.id);
       if (task) task.status = action.payload.status;
     },
@@ -62,27 +54,16 @@ const tasksSlice = createSlice({
       state.filters = initialFilters;
       state.pagination.currentPage = 1;
     },
-    setPage(
-      state,
-      action: PayloadAction<{ currentPage: number; pageSize?: number }>,
-    ) {
+    setPage(state, action: PayloadAction<{ currentPage: number; pageSize?: number }>) {
       state.pagination.currentPage = action.payload.currentPage;
       if (action.payload.pageSize) {
         state.pagination.pageSize = action.payload.pageSize;
       }
-    },
-  },
+    }
+  }
 });
 
-export const {
-  addTask,
-  updateTask,
-  deleteTask,
-  deleteManyTasks,
-  updateTaskStatus,
-  setFilter,
-  resetFilters,
-  setPage,
-} = tasksSlice.actions;
+export const { addTask, updateTask, deleteTask, deleteManyTasks, updateTaskStatus, setFilter, resetFilters, setPage } =
+  tasksSlice.actions;
 
 export default tasksSlice.reducer;
