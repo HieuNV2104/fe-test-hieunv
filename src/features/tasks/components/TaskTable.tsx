@@ -1,4 +1,4 @@
-import { Button, Select, Space, Table, Tooltip } from 'antd';
+import { Button, Popconfirm, Select, Space, Table, Tooltip } from 'antd';
 import type { TableColumnsType, TablePaginationConfig } from 'antd';
 import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
@@ -9,15 +9,35 @@ import { PriorityTag } from './PriorityTag';
 import { selectFilteredTasks } from '@/store/tasksSelectors';
 import { setPage, updateTaskStatus } from '@/store/tasksSlice';
 
-const Action = () => {
+interface TaskTableProps {
+  selectedRowKeys: string[];
+  onSelectionChange: (keys: string[]) => void;
+  onEdit: (task: Task) => void;
+  onDelete: (task: Task) => void;
+}
+
+interface ActionProps {
+  record: Task;
+  onEdit: (task: Task) => void;
+  onDelete: (task: Task) => void;
+}
+
+const Action = ({ record, onEdit, onDelete }: ActionProps) => {
   return (
     <Space size={4}>
       <Tooltip title="Sửa">
-        <Button type="text" size="small" icon={<EditOutlined />} disabled />
+        <Button type="text" size="small" icon={<EditOutlined />} onClick={() => onEdit(record)} />
       </Tooltip>
-      <Tooltip title="Xoá">
-        <Button type="text" size="small" danger icon={<DeleteOutlined />} disabled />
-      </Tooltip>
+      <Popconfirm
+        title="Xoá task này?"
+        description="Hành động không thể hoàn tác."
+        okText="Xoá"
+        cancelText="Huỷ"
+        okButtonProps={{ danger: true }}
+        onConfirm={() => onDelete(record)}
+      >
+        <Button type="text" size="small" danger icon={<DeleteOutlined />} />
+      </Popconfirm>
     </Space>
   );
 };
@@ -35,7 +55,7 @@ const SelectSattus = (record: Task, handleChangeStatus: (status: TaskStatus, rec
   );
 };
 
-export function TaskTable() {
+export function TaskTable({ selectedRowKeys, onSelectionChange, onEdit, onDelete }: TaskTableProps) {
   const dispatch = useAppDispatch();
   const items = useAppSelector(selectFilteredTasks);
   const { currentPage, pageSize } = useAppSelector((state) => state.tasks.pagination);
@@ -80,7 +100,7 @@ export function TaskTable() {
       key: 'priority',
       width: 130,
       sorter: (a, b) => getPriorityWeight(a.priority) - getPriorityWeight(b.priority),
-      render: (_value, record) => <PriorityTag priority={record.priority} />
+      render: (_, record) => <PriorityTag priority={record.priority} />
     },
     {
       title: 'Người được giao',
@@ -102,7 +122,7 @@ export function TaskTable() {
       key: 'actions',
       width: 110,
       fixed: 'right',
-      render: Action
+      render: (_, record) => <Action record={record} onEdit={onEdit} onDelete={onDelete} />
     }
   ];
 
@@ -111,6 +131,10 @@ export function TaskTable() {
       rowKey="id"
       columns={columns}
       dataSource={items}
+      rowSelection={{
+        selectedRowKeys,
+        onChange: (keys) => onSelectionChange(keys.map(String))
+      }}
       pagination={pagination}
       onChange={handleChangePage}
       scroll={{ x: 1100 }}
