@@ -3,6 +3,7 @@ import { Button, Card, Popconfirm, Space, Typography } from 'antd';
 import { DeleteOutlined, PlusOutlined } from '@ant-design/icons';
 import { TaskTable } from '@/features/tasks/components/TaskTable';
 import { TaskFormModal } from '@/features/tasks/components/TaskFormModal';
+import { TaskFilters } from '@/features/tasks/components/TaskFilters';
 import { useAppDispatch } from '@/store/hooks';
 import { deleteManyTasks, deleteTask } from '@/store/tasksSlice';
 import type { Task } from '@/types/task';
@@ -69,6 +70,9 @@ export default function TasksPage() {
           </Button>
         </Space>
       </div>
+      <Card>
+        <TaskFilters />
+      </Card>
       <Card styles={{ body: { padding: 0 } }}>
         <TaskTable
           selectedRowKeys={selectedIds}
