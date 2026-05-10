@@ -11,3 +11,8 @@ export function formatDate(input?: string | null): string {
 export function getPriorityWeight(p: TaskPriority): number {
   return PRIORITY_CONFIG[p].weight;
 }
+
+export const trimOrUndefined = (v?: string): string | undefined => {
+  const trimmed = v?.trim();
+  return trimmed ? trimmed : undefined;
+};
