@@ -107,7 +107,7 @@ export function TaskTable({ selectedRowKeys, onSelectionChange, onEdit, onDelete
       dataIndex: 'assignee',
       key: 'assignee',
       width: 180,
-      render: (value?: string) => value ?? <span className="text-gray-400">—</span>
+      render: (value?: string) => value ?? <span className="text-gray-400 dark:text-gray-500">—</span>
     },
     {
       title: 'Hạn chót',
@@ -115,7 +115,7 @@ export function TaskTable({ selectedRowKeys, onSelectionChange, onEdit, onDelete
       key: 'dueDate',
       width: 130,
       sorter: (a, b) => (a.dueDate ?? '').localeCompare(b.dueDate ?? ''),
-      render: (value?: string) => (value ? formatDate(value) : <span className="text-gray-400">—</span>)
+      render: (value?: string) => (value ? formatDate(value) : <span className="text-gray-400 dark:text-gray-500">—</span>)
     },
     {
       title: 'Hành động',

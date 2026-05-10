@@ -78,7 +78,9 @@ export function TaskFormModal({ open, task, onClose }: TaskFormModalProps) {
       onCancel={onClose}
       onOk={handleSubmit}
       maskClosable={false}
-      width={560}
+      width="95%"
+      style={{ maxWidth: 560 }}
+      centered
     >
       <Form form={form} layout="vertical" autoComplete="off" preserve={false}>
         <Form.Item
@@ -96,7 +98,7 @@ export function TaskFormModal({ open, task, onClose }: TaskFormModalProps) {
           <Input.TextArea rows={3} placeholder="Mô tả chi tiết task..." />
         </Form.Item>
 
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-4">
           <Form.Item name="status" label="Trạng thái" rules={[{ required: true, message: 'Vui lòng chọn trạng thái' }]}>
             <Select options={STATUS_TEXT_OPTIONS} />
           </Form.Item>
@@ -110,7 +112,7 @@ export function TaskFormModal({ open, task, onClose }: TaskFormModalProps) {
           </Form.Item>
         </div>
 
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-4">
           <Form.Item name="assignee" label="Người được giao">
             <AutoComplete
               options={ASSIGNEE_OPTIONS}
