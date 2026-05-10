@@ -43,14 +43,14 @@ export default function TasksPage() {
 
   return (
     <div className="space-y-4">
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
         <div>
           <Title level={3} className="!mb-0">
             Danh sách Task
           </Title>
           <Text type="secondary">Quản lý công việc nội bộ</Text>
         </div>
-        <Space>
+        <Space wrap>
           {selectedIds.length > 0 && (
             <Popconfirm
               title={`Xoá ${selectedIds.length} task đã chọn?`}

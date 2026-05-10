@@ -22,7 +22,7 @@ export function RecentTasksList() {
           <List.Item key={task.id} className="!px-0">
             <div className="w-full flex flex-col gap-1">
               <div className="flex items-start justify-between gap-2">
-                <span className="font-medium text-gray-800 truncate">{task.title}</span>
+                <span className="font-medium text-gray-800 dark:text-gray-100 truncate">{task.title}</span>
                 <Text type="secondary" className="!text-xs whitespace-nowrap">
                   {formatDate(task.createdAt)}
                 </Text>

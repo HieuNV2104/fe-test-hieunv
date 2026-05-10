@@ -33,8 +33,8 @@ export function StatusProgress() {
           return (
             <div key={row.key}>
               <div className="flex justify-between text-sm mb-1">
-                <span className="text-gray-700">{row.label}</span>
-                <span className="text-gray-500">
+                <span className="text-gray-700 dark:text-gray-300">{row.label}</span>
+                <span className="text-gray-500 dark:text-gray-400">
                   {count} / {stats.total}
                 </span>
               </div>

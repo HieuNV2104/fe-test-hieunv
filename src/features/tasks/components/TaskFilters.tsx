@@ -35,7 +35,7 @@ export function TaskFilters() {
   return (
     <div className="grid grid-cols-1 md:grid-cols-12 gap-3 items-end">
       <div className="md:col-span-4">
-        <label className="block text-xs text-gray-500 mb-1">Tìm kiếm</label>
+        <label className="block text-xs text-gray-500 dark:text-gray-400 mb-1">Tìm kiếm</label>
         <Input.Search
           placeholder="Tìm theo tiêu đề..."
           value={searchInput}
@@ -44,7 +44,7 @@ export function TaskFilters() {
         />
       </div>
       <div className="md:col-span-3">
-        <label className="block text-xs text-gray-500 mb-1">Trạng thái</label>
+        <label className="block text-xs text-gray-500 dark:text-gray-400 mb-1">Trạng thái</label>
         <Select<TaskStatus[]>
           mode="multiple"
           placeholder="Tất cả trạng thái"
@@ -57,7 +57,7 @@ export function TaskFilters() {
         />
       </div>
       <div className="md:col-span-2">
-        <label className="block text-xs text-gray-500 mb-1">Độ ưu tiên</label>
+        <label className="block text-xs text-gray-500 dark:text-gray-400 mb-1">Độ ưu tiên</label>
         <Select<TaskPriority>
           placeholder="Tất cả"
           options={PRIORITY_OPTIONS}
@@ -68,7 +68,7 @@ export function TaskFilters() {
         />
       </div>
       <div className="md:col-span-2">
-        <label className="block text-xs text-gray-500 mb-1">Hạn chót</label>
+        <label className="block text-xs text-gray-500 dark:text-gray-400 mb-1">Hạn chót</label>
         <RangePicker
           value={dateRangeValue}
           onChange={(dates) => {
